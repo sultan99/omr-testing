@@ -1,11 +1,29 @@
 import React from 'react'
-import {Options} from 'components'
+import styled from 'styled-components'
+import {Options, Card, Column as ColumnSet, IconButton} from 'components'
+
+const {Column, ColumnPanel} = ColumnSet
+
+const extra = () => {
+  const Panel = styled.div`
+    button + button {
+      margin-left: 20px;
+    }
+  `
+  return (
+    <Panel>
+      <IconButton icon="wizard" breakpoint={900}>Genrate</IconButton>
+      <IconButton icon="export" breakpoint={900}>Export</IconButton>
+      <IconButton icon="save" breakpoint={700} primary>Save</IconButton>
+    </Panel>
+  )
+}
 
 class HomePage extends React.Component {
   constructor() {
     super()
     const questions = []
-    for (let i = 0; i < 100; i ++) {
+    for (let i = 0; i < 120; i ++) {
       questions.push([])
     }
     this.state = {
@@ -35,9 +53,26 @@ class HomePage extends React.Component {
         <br/>
       </div>
     )
+    const options = this.state.questions.map(eachOption)
+    const cardStyle = {minWidth: `820px`, maxWidth: `1500px`}
     return (
       <div>
-        {this.state.questions.map(eachOption)}
+        <Card title="Test generator" extra={extra()} style={cardStyle}>
+          <ColumnPanel>
+            <Column width="280px">
+              {options.slice(0, 30)}
+            </Column>
+            <Column width="280px">
+              {options.slice(30, 60)}
+            </Column>
+            <Column width="280px">
+              {options.slice(60, 90)}
+            </Column>
+            <Column width="280px">
+              {options.slice(90, 120)}
+            </Column>
+          </ColumnPanel>
+        </Card>
       </div>
     )
   }

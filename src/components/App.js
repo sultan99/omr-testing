@@ -7,7 +7,10 @@ import theme from './themes/default'
 
 injectGlobal`
   body {
-    margin: 0;
+    background-color: #f6f6f6;
+    display: flex;
+    justify-content: center;
+    margin: 30px;
   }
 `
 
