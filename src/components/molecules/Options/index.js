@@ -5,7 +5,8 @@ import {Bubble} from 'components'
 
 const Wrapper = styled.div`
   align-items: center;
-  display: flex;
+  display: inline-flex;
+  margin: 5px 0 ;
 
   > span {
     color: gray;

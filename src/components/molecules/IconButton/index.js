@@ -5,17 +5,17 @@ import {ifProp, prop} from 'styled-tools'
 import {Icon, Button} from 'components'
 
 const StyledButton = styled(Button)`
-  max-width: ${props => props.hasText ? `100%` : `2.5em`};
-  width: ${ifProp(`hasText`, `auto`, `2.5em`)};
-  padding: ${ifProp(`hasText`, `0 1.5em`, 0)};
-  flex: 0 0 2.5em;
   box-sizing: border-box;
+  flex: 0 0 2.5em;
+  max-width: ${props => props.hasText ? `100%` : `2.5em`};
+  padding: ${ifProp(`hasText`, `0 1.5em`, 0)};
+  width: ${ifProp(`hasText`, `auto`, `2.5em`)};
 
   ${ifProp(`responsive`, css`
     @media screen and (max-width: ${prop(`breakpoint`)}px) {
-      width: auto;
       flex: 0 !important;
       padding: 0 0.8em;
+      width: auto;
     }
   `)}
 `
@@ -26,11 +26,11 @@ const Text = styled.span`
   }
 `
 const Wrapper = styled.div`
-  display: flex;
   align-items: center;
+  display: flex;
+  height: 100%;
   justify-content: center;
   width: 100%;
-  height: 100%;
 `
 const StyledIcon = styled(Icon)`
   flex: none;
@@ -45,7 +45,7 @@ const IconButton = ({icon, children, ...props}) => {
       <Wrapper>
         {right || iconElement}
         {children &&
-          <Text className="text" responsive={responsive} breakpoint={breakpoint}>
+          <Text responsive={responsive} breakpoint={breakpoint}>
             {children}
           </Text>
         }

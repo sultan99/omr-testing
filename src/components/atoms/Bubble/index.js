@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled, {keyframes} from 'styled-components'
+import {font} from 'styled-theme'
 import {Icon} from 'components'
 
 const gray = `#3d3d3d`
@@ -47,9 +48,10 @@ const Wrapper = styled.div`
   box-sizing: border-box;
   color: ${color(false)}
   cursor: pointer;
+  font-family: ${font(`primary`)};
   font-size: 20px;
   height: 40px;
-  padding-top: 10px;
+  padding-top: 8px;
   text-align: center;
   user-select: none;
   width: 40px;

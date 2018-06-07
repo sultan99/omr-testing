@@ -31,6 +31,6 @@ storiesOf(`Options`, module)
   .add(`Selected many`, () =>
     <Options selected={[`A`, `D`]} values={[`A`, `B`, `C`, `D`, `E`]}/>
   )
-  .add(`No & with state`, () =>
+  .add(`Order No & with state`, () =>
     <OptionsWithState/>
   )

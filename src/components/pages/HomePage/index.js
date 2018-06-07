@@ -1,23 +1,15 @@
 import React from 'react'
-import styled from 'styled-components'
-import {Options, Card, Column as ColumnSet, IconButton} from 'components'
+import {Options, Card, Column, IconButton, Panels} from 'components'
 
-const {Column, ColumnPanel} = ColumnSet
+const {ButtonPanel, ColumnPanel} = Panels
 
-const extra = () => {
-  const Panel = styled.div`
-    button + button {
-      margin-left: 20px;
-    }
-  `
-  return (
-    <Panel>
-      <IconButton icon="wizard" breakpoint={900}>Genrate</IconButton>
-      <IconButton icon="export" breakpoint={900}>Export</IconButton>
-      <IconButton icon="save" breakpoint={700} primary>Save</IconButton>
-    </Panel>
-  )
-}
+const extra = () => (
+  <ButtonPanel>
+    <IconButton icon="export" breakpoint={930}>Export</IconButton>
+    <IconButton icon="wizard" breakpoint={830}>Genrate</IconButton>
+    <IconButton icon="save" breakpoint={730} primary>Save</IconButton>
+  </ButtonPanel>
+)
 
 class HomePage extends React.Component {
   constructor() {
@@ -43,37 +35,33 @@ class HomePage extends React.Component {
   render() {
     const values = [`A`, `B`, `C`, `D`, `E`]
     const eachOption = (selected, index) => (
-      <div key={`opt-${index}`}>
-        <Options
-          no={index + 1}
-          selected={selected}
-          values={values}
-          onClick={this.onClick(index)}
-        />
-        <br/>
-      </div>
+      <Options
+        key={index}
+        no={index + 1}
+        selected={selected}
+        values={values}
+        onClick={this.onClick(index)}
+      />
     )
     const options = this.state.questions.map(eachOption)
-    const cardStyle = {minWidth: `820px`, maxWidth: `1500px`}
+    const widths = [`280px`, `325px`]
     return (
-      <div>
-        <Card title="Test generator" extra={extra()} style={cardStyle}>
-          <ColumnPanel>
-            <Column width="280px">
-              {options.slice(0, 30)}
-            </Column>
-            <Column width="280px">
-              {options.slice(30, 60)}
-            </Column>
-            <Column width="280px">
-              {options.slice(60, 90)}
-            </Column>
-            <Column width="280px">
-              {options.slice(90, 120)}
-            </Column>
-          </ColumnPanel>
-        </Card>
-      </div>
+      <Card title="Test generator" extra={extra()} style={{minWidth: `480px`}}>
+        <ColumnPanel>
+          <Column widths={widths}>
+            {options.slice(0, 30)}
+          </Column>
+          <Column widths={widths}>
+            {options.slice(30, 60)}
+          </Column>
+          <Column widths={widths}>
+            {options.slice(60, 90)}
+          </Column>
+          <Column widths={widths}>
+            {options.slice(90, 120)}
+          </Column>
+        </ColumnPanel>
+      </Card>
     )
   }
 }

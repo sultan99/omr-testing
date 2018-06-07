@@ -5,11 +5,22 @@ import {font} from 'styled-theme'
 
 const Head = styled.div`
   align-items: center;
-  background-color: #fcfcfc;
   display: flex;
-  font-size: 34px;
+  background-color: #fcfcfc;
   justify-content: space-between;
   padding: 30px 60px;
+
+  > div:last-child {
+    min-width: 200px;
+  }
+`
+const Caption = styled.div`
+  font-family: ${font(`primary`)};
+  font-size: 34px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `
 const Body = styled.div`
   background-color: white;
@@ -18,23 +29,22 @@ const Body = styled.div`
 `
 const Wrapper = styled.div`
   box-shadow: rgba(0,0,0,0.10) 0px 1px 4px;
-  font-family: ${font(`primary`)};
   padding: 0;
 `
 
 const Card = ({title, extra, children, ...props}) => (
   <Wrapper {...props}>
     <Head>
-      <span>{title}</span>
-      <span>{extra}</span>
+      <Caption>{title}</Caption>
+      <div>{extra}</div>
     </Head>
     <Body>{children}</Body>
   </Wrapper>
 )
 
 Card.propTypes = {
-  title: PropTypes.string,
-  extra: PropTypes.node
+  extra: PropTypes.node,
+  title: PropTypes.string
 }
 
 export default Card

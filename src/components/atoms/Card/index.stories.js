@@ -1,7 +1,6 @@
 import React from 'react'
-import styled from 'styled-components'
 import {storiesOf} from '@storybook/react'
-import {Card, IconButton} from 'components'
+import {Card, IconButton, Panels} from 'components'
 
 storiesOf(`Card`, module)
   .add(`Title`, () =>
@@ -15,20 +14,14 @@ storiesOf(`Card`, module)
     </Card>
   )
   .add(`Extra`, () => {
-    const extra = () => {
-      const Panel = styled.div`
-        button + button {
-          margin-left: 20px;
-        }
-      `
-      return (
-        <Panel>
-          <IconButton icon="wizard" breakpoint={1135}>Genrate</IconButton>
-          <IconButton icon="export" breakpoint={1135}>Export</IconButton>
-          <IconButton icon="save" primary>Save</IconButton>
-        </Panel>
-      )
-    }
+    const {ButtonPanel} = Panels
+    const extra = () => (
+      <ButtonPanel>
+        <IconButton icon="wizard" breakpoint={1135}>Genrate</IconButton>
+        <IconButton icon="export" breakpoint={1135}>Export</IconButton>
+        <IconButton icon="save" primary>Save</IconButton>
+      </ButtonPanel>
+    )
     return (
       <Card title="Test generator" extra={extra()}>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import {font} from 'styled-theme'
 import {ifProp} from 'styled-tools'
 
 const backgroundColor = ({primary}) => primary ? `#1fb1ee` : `#4f4f4f`
@@ -9,6 +10,7 @@ const Button = styled.button`
   border: none;
   color: white;
   cursor: ${ifProp(`disabled`, `default`, `pointer`)};
+  font-family: ${font(`primary`)};
   font-size: 19px;
   height: 2.5em;
   padding: 0 1.5em;

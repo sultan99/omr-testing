@@ -1,13 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
-import {IconButton} from 'components'
+import {IconButton, Panels} from 'components'
 import {storiesOf} from '@storybook/react'
 
-const Panel = styled.div`
-  button + button {
-    margin-left: 15px;
-  }
-`
+const {ButtonPanel} = Panels
 
 storiesOf(`IconButton`, module)
   .add(`No label`, () =>
@@ -20,8 +15,8 @@ storiesOf(`IconButton`, module)
     <IconButton icon="wizard">Wizard</IconButton>
   )
   .add(`Responsive`, () =>
-    <Panel>
+    <ButtonPanel>
       <IconButton icon="save" primary>Save</IconButton>
       <IconButton icon="export">Export</IconButton>
-    </Panel>
+    </ButtonPanel>
   )

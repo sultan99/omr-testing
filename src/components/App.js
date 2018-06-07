@@ -8,8 +8,6 @@ import theme from './themes/default'
 injectGlobal`
   body {
     background-color: #f6f6f6;
-    display: flex;
-    justify-content: center;
     margin: 30px;
   }
 `
