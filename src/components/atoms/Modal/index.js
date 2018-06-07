@@ -13,7 +13,7 @@ const Head = styled.div`
   font-size: 25px;
   height: 90px;
   justify-content: space-between;
-  padding: 0 30px;
+  padding: 0 50px;
   width: auto;
 
   > span:last-child {
@@ -26,13 +26,13 @@ const Head = styled.div`
 `
 const Body = styled.div`
   background-color: white;
-  padding: 50px 30px;
+  padding: 50px;
   width: auto;
   flex-grow: 1;
 `
 const Footer = styled.div`
   background-color: #fcfcfc;
-  padding: 0 30px;
+  padding: 0 50px;
   display: flex;
   height: 115px;
   align-items: center;
@@ -63,7 +63,10 @@ const Mask = styled.div`
 class Modal extends React.Component {
   render() {
     const {title, children, footer, onClose, visible} = this.props
-    return visible && (
+    if (!visible) {
+      return null
+    }
+    return (
       <Mask>
         <Window>
           <Head>{title}<Icon type="cancel" onClick={onClose}/></Head>

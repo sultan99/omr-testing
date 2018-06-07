@@ -10,7 +10,7 @@ const Input = styled.input`
   font-size: 24px;
   height: 2.5em;
   padding: 0 0.5em 0 1.2em;
-  text-align: right;
+  text-align: ${props => props.type === `number` ? `right` : `left`};
 
   &[type=number]::-webkit-inner-spin-button {
     margin-left: 8px;

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Options, Card, Column, IconButton, Modal, Panels, Input} from 'components'
+import {Options, Card, Column, IconButton, GenerateForm, Panels} from 'components'
 
 const {ButtonPanel, ColumnPanel} = Panels
 
@@ -39,7 +39,6 @@ class HomePage extends React.Component {
       optionValues.push(String.fromCharCode(65 + i))
     }
     this.setState({
-      isVisibleModal: false,
       numberColumns,
       optionValues,
       options
@@ -62,28 +61,6 @@ class HomePage extends React.Component {
         </IconButton>
         <IconButton icon="save" breakpoint={730} primary onClick={this.save}>
           Save
-        </IconButton>
-      </ButtonPanel>
-    )
-  }
-  modalBody() {
-    return (
-      <div>
-        <Input placeholder="Number of questions" type="number"/>
-        <Input placeholder="Number of columns" type="number"/>
-        <Input placeholder="Number of options" type="number"/>
-      </div>
-    )
-  }
-  modalFooter() {
-    const onGenerate = () => this.generate(400, 5, 4)
-    return (
-      <ButtonPanel>
-        <IconButton icon="wizard" primary onClick={onGenerate}>
-          Generate
-        </IconButton>
-        <IconButton icon="cancel" danger onClick={this.closeModal}>
-          Cancel
         </IconButton>
       </ButtonPanel>
     )
@@ -124,13 +101,11 @@ class HomePage extends React.Component {
         <ColumnPanel>
           {this.getColumns()}
         </ColumnPanel>
-        <Modal
-          title="Let's do it!"
+        <GenerateForm
           visible={isVisibleModal}
+          onGenerate={this.generate}
           onClose={this.closeModal}
-          footer={this.modalFooter()}>
-          {this.modalBody()}
-        </Modal>
+        />
       </Card>
     )
   }

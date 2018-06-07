@@ -1,8 +1,6 @@
 import React from 'react'
 import {storiesOf} from '@storybook/react'
-import {Button, IconButton, Modal, Panels} from 'components'
-
-const {ButtonPanel} = Panels
+import {Button, Modal} from 'components'
 
 class ModalWithState extends React.Component {
   constructor() {
@@ -15,25 +13,14 @@ class ModalWithState extends React.Component {
   onClose = () => {
     this.setState({visible: false})
   }
-  footer() {
-    return (
-      <ButtonPanel>
-        <IconButton icon="wizard" primary>Generate</IconButton>
-        <IconButton icon="cancel" danger onClick={this.onClose}>Cancel</IconButton>
-      </ButtonPanel>
-    )
-  }
   render() {
     const {visible} = this.state
     return [
-      <Button onClick={this.showModal}>Show modal</Button>,
+      <Button onClick={this.showModal}>Open modal</Button>,
       <Modal
         title="Let's do it!"
         visible={visible}
-        onClose={this.onClose}
-        footer={this.footer()}
-      >
-        Куку
+        onClose={this.onClose}>
       </Modal>
     ]
   }
