@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import {font} from 'styled-theme'
-import {Icon} from 'components'
+import {Icon, Mask} from 'components'
 
 const Head = styled.div`
   align-items: center;
@@ -26,38 +26,25 @@ const Head = styled.div`
 `
 const Body = styled.div`
   background-color: white;
+  flex-grow: 1;
   padding: 50px;
   width: auto;
-  flex-grow: 1;
 `
 const Footer = styled.div`
+  align-items: center;
   background-color: #fcfcfc;
-  padding: 0 50px;
   display: flex;
   height: 115px;
-  align-items: center;
-  width: auto;
   justify-content: flex-end;
+  padding: 0 50px;
+  width: auto;
 `
 const Window = styled.div`
   background-color: white;
-  height: 550px;
-  width: 600px;
   display: flex;
   flex-direction: column;
-`
-const Mask = styled.div`
-  align-items: center;
-  background-color: #373737;
-  background-color: rgba(0, 0, 0, 0.65);
-  display: flex;
-  height: 100%;
-  justify-content: center;
-  left: 0;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
+  height: 550px;
+  width: 600px;
 `
 
 class Modal extends React.Component {

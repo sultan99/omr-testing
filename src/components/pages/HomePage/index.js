@@ -1,17 +1,50 @@
 import React from 'react'
-import {Options, Card, Column, IconButton, GenerateForm, Panels} from 'components'
+import {Options, Card, Column, IconButton, GenerateForm, Panels, Spinner} from 'components'
 
 const {ButtonPanel, ColumnPanel} = Panels
+
+function download(data, filename, type) {
+  const file = new Blob([data], {type})
+  if (window.navigator.msSaveOrOpenBlob) // IE10+
+    window.navigator.msSaveOrOpenBlob(file, filename)
+  else {
+    const a = document.createElement(`a`)
+    const url = URL.createObjectURL(file)
+    a.href = url
+    a.download = filename
+    document.body.appendChild(a)
+    a.click()
+    setTimeout(function () {
+      document.body.removeChild(a)
+      window.URL.revokeObjectURL(url)
+    }, 0)
+  }
+}
 
 class HomePage extends React.Component {
   constructor() {
     super()
     this.state = {
       isVisibleModal: false,
+      loading: true,
       numberColumns: 4,
       options: [],
-      optionValues: [`A`, `B`, `C`, `D`]
+      optionValues: [],
+      renderData: false
     }
+  }
+  componentDidMount() {
+    const getItem = name => JSON.parse(localStorage.getItem(name))
+    this.setState({
+      loading: true,
+      numberColumns: getItem(`numberColumns`) || 4,
+      options: getItem(`options`) || [],
+      optionValues: getItem(`optionValues`) || [`A`, `B`, `C`, `D`],
+      renderData: true
+    }, this.stopLoading)
+  }
+  stopLoading() {
+    setTimeout(() => this.setState({loading: false}), 1000 / 60)
   }
   showModal = () => {
     this.setState({isVisibleModal: true})
@@ -30,25 +63,43 @@ class HomePage extends React.Component {
     this.setState({options})
   }
   generate = (numberQuestions, numberOptions, numberColumns) => {
-    const options = []
-    const optionValues = []
-    for (let i = 0; i < numberQuestions; i ++) {
-      options.push([])
+    const after = () => {
+      this.save()
+      this.stopLoading()
     }
-    for (let i = 0; i < numberOptions; i ++) {
-      optionValues.push(String.fromCharCode(65 + i))
+    const before = () => {
+      const options = []
+      const optionValues = []
+      for (let i = 0; i < numberQuestions; i ++) {
+        options.push([])
+      }
+      for (let i = 0; i < numberOptions; i ++) {
+        optionValues.push(String.fromCharCode(65 + i))
+      }
+      this.setState({
+        numberColumns,
+        options,
+        optionValues,
+        renderData: true
+      }, after)
     }
-    this.setState({
-      numberColumns,
-      optionValues,
-      options
-    })
+    this.setState(
+      {isVisibleModal: false, loading: true, renderData: false},
+      () => setTimeout(before, 1000 / 60)
+    )
   }
   exportData = () => {
-    console.log(`exporting`)
+    const data = this.state.options
+      .map((values, index) => `${index + 1}: ${values.sort().join(``)}`)
+      .join(`\r\n`)
+    download(data, `results.txt`, `text`)
   }
   save = () => {
-    console.log(`saving`)
+    const {options, optionValues, numberColumns} = this.state
+    const setItem = (name, value) => localStorage.setItem(name, JSON.stringify(value))
+    setItem(`options`, options)
+    setItem(`optionValues`, optionValues)
+    setItem(`numberColumns`, numberColumns)
   }
   cardExtra() {
     return (
@@ -79,10 +130,12 @@ class HomePage extends React.Component {
     return options.slice(offset, last).map(eachOption)
   }
   getColumns() {
+    const SPAN_WIDTH = 35 // span widht of questions' orderNo
     const result = []
-    const {numberColumns, options} = this.state
-    const widths = [`280px`, `325px`]
+    const {numberColumns, options, optionValues} = this.state
     const size = Math.ceil(options.length / numberColumns)
+    const min = SPAN_WIDTH + optionValues.length * 50
+    const widths = [`${min}px`, `${min + 10}px`]
     for (let i = 0; i < numberColumns; i ++) {
       const offset = i * size
       const last = i === numberColumns - 1 ? options.length : offset + size
@@ -95,17 +148,18 @@ class HomePage extends React.Component {
     return result
   }
   render() {
-    const {isVisibleModal} = this.state
+    const {isVisibleModal, loading, renderData} = this.state
     return (
       <Card title="Test generator" extra={this.cardExtra()} style={{minWidth: `480px`}}>
         <ColumnPanel>
-          {this.getColumns()}
+          {renderData && !loading && this.getColumns()}
         </ColumnPanel>
         <GenerateForm
           visible={isVisibleModal}
           onGenerate={this.generate}
           onClose={this.closeModal}
         />
+        <Spinner visible={loading}>Please wait...</Spinner>
       </Card>
     )
   }

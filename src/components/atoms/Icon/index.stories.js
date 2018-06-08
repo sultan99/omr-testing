@@ -18,3 +18,6 @@ storiesOf(`Icon`, module)
   .add(`Cancel`, () =>
     <Icon type="cancel" color="black"/>
   )
+  .add(`Spinner`, () =>
+    <Icon type="spinner" color="black"/>
+  )

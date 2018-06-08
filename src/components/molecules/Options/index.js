@@ -12,7 +12,7 @@ const Wrapper = styled.div`
     color: gray;
     display: block;
     text-align: right;
-    width: 28px;
+    width: 35px;
   }
 
   span + div {
@@ -28,15 +28,10 @@ class Options extends React.Component {
     const {selected} = this.props
     return selected.length !== nextProps.selected.length
   }
-  render() {
-    const {no, selected, values, onClick} = this.props
+  selectedBubble() {
+    const {selected, onClick} = this.props
     const click = value => () => onClick(value)
-    const restBubble = (value, index) => (
-      <Bubble key={index} onClick={click(value)}>
-        {value}
-      </Bubble>
-    )
-    const selectedBubble = (value, index) => {
+    return (value, index) => {
       const isSelected = selected.includes(value)
       return (
         <Bubble key={index} selected={isSelected} dashed={!isSelected} onClick={click(value)}>
@@ -44,19 +39,30 @@ class Options extends React.Component {
         </Bubble>
       )
     }
-    const bubble = selected.length ? selectedBubble : restBubble
+  }
+  restBubble() {
+    const {onClick} = this.props
+    return (value, index) => (
+      <Bubble key={index} onClick={() => onClick(value)}>
+        {value}
+      </Bubble>
+    )
+  }
+  render() {
+    const {no, selected, values} = this.props
+    const bubbles = selected.length ? this.selectedBubble() : this.restBubble()
     const orderNo = no && <span>{no}</span>
     return (
       <Wrapper>
-        {orderNo}{values.map(bubble)}
+        {orderNo}{values.map(bubbles)}
       </Wrapper>
     )
   }
 }
 
 Options.propTypes = {
-  onClick: PropTypes.func,
   no: PropTypes.number,
+  onClick: PropTypes.func,
   selected: PropTypes.array,
   values: PropTypes.array
 }

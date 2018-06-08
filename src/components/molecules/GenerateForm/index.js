@@ -27,13 +27,20 @@ class GenerateForm extends React.Component {
     }
   }
   onGenerate = () => {
-    this.props.onClose()
     const {questions, options, columns} = this.state
     this.props.onGenerate(questions, options, columns)
   }
-  onChange = name => event => {
+  onChange = (name, max) => event => {
     const {value} = event.target
-    this.setState({[name]: parseInt(value, 10)})
+    if (value <= max) {
+      this.setState({[name]: parseInt(value, 10)})
+    }
+  }
+  onBlur = (name, min) => event => {
+    const {value} = event.target
+    if (value <= min) {
+      this.setState({[name]: parseInt(min, 10)})
+    }
   }
   modalFooter() {
     return (
@@ -49,7 +56,14 @@ class GenerateForm extends React.Component {
   }
   render() {
     const {visible, onClose} = this.props
-    const {questions, options, columns} = this.state
+    const props = (name, min, max) => ({
+      value: `${this.state[name]}`,
+      onChange: this.onChange(name, max),
+      onBlur: this.onBlur(name, min),
+      type: `number`,
+      min: `${min}`,
+      max: `${max}`
+    })
     return (
       <Modal
         title="Let's do it!"
@@ -58,11 +72,11 @@ class GenerateForm extends React.Component {
         footer={this.modalFooter()}>
         <Wrapper>
           <Label>Number of questions</Label>
-          <Input value={`${questions}`} onChange={this.onChange(`questions`)} type="number"/>
+          <Input {...props(`questions`, 1, 1000)}/>
           <Label>Number of options</Label>
-          <Input value={`${options}`} onChange={this.onChange(`options`)} type="number"/>
+          <Input {...props(`options`, 2, 5)}/>
           <Label>Number of columns</Label>
-          <Input value={`${columns}`} onChange={this.onChange(`columns`)} type="number"/>
+          <Input {...props(`columns`, 1, 5)}/>
         </Wrapper>
       </Modal>
     )

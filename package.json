@@ -6,7 +6,6 @@
     "start": "npm run dev",
     "env:dev": "cross-env NODE_ENV=development",
     "env:prod": "cross-env NODE_ENV=production",
-    "postcoverage": "opn coverage/lcov-report/index.html",
     "lint": "eslint src src private webpack.config.js",
     "storybook": "start-storybook -p 9001 -c private/storybook",
     "dev": "npm run env:dev -- webpack-dev-server",
@@ -14,20 +13,6 @@
     "build:copy": "copyfiles -u 1 public/* public/**/* dist",
     "prebuild": "npm run build:clean && npm run build:copy",
     "build": "npm run env:prod -- webpack"
-  },
-  "jest": {
-    "moduleDirectories": [
-      "src",
-      "src-example",
-      "node_modules"
-    ],
-    "moduleNameMapper": {
-      "^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/private/jest/fileMock.js",
-      "^components$": "<rootDir>/private/jest/componentsMock.js"
-    },
-    "setupFiles": [
-      "<rootDir>/private/jest/setupTests.js"
-    ]
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.0.0",
