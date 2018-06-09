@@ -11,6 +11,5 @@ const http = require(`http`)
 const server = http.createServer(app.callback())
 const port = process.env.PORT || 3000
 
-console.info(`Production mode`)
-console.info(`Listening on ${port}`)
 server.listen(port)
+console.info(`Listening on ${port}`)
