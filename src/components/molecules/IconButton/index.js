@@ -20,7 +20,7 @@ const StyledButton = styled(Button)`
   `)}
 `
 const Text = styled.span`
-  padding: 4px 5px 0 5px;
+  padding: 1px 0px 0 4px;
   @media screen and (max-width: ${prop(`breakpoint`)}px) {
     display: ${ifProp(`responsive`, `none !important`)};
   }

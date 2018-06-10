@@ -3,6 +3,8 @@
 ### 1. Install dependencies
 
 ```sh
+$ git clone https://github.com/sultan99/omr-testing.git
+$ cd omr-testing
 $ npm install
 ```
 
@@ -21,7 +23,7 @@ It will start the development server with [HMR](https://webpack.github.io/docs/h
 $ npm run storybook
 ```
 It will start the [storybook](https://storybook.js.org/) server.
-> [http://localhost:9001](http://localhost:3001) — Storybook<br>
+> [http://localhost:9001](http://localhost:9001) — Storybook<br>
 
 <br/>
 <br/>

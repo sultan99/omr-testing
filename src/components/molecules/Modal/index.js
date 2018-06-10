@@ -23,7 +23,7 @@ const Head = styled.div`
   font-size: 25px;
   height: 90px;
   justify-content: space-between;
-  padding: 0 50px;
+  padding: 0 44px 0 50px;
   width: auto;
 
   > span:last-child {

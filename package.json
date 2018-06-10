@@ -1,9 +1,9 @@
 {
-  "name": "arc",
+  "name": "OMR-Test",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "npm run build && node index",
+    "start": "npm run dev",
     "env:dev": "cross-env NODE_ENV=development",
     "env:prod": "cross-env NODE_ENV=production",
     "lint": "eslint src src private webpack.config.js",
@@ -52,8 +52,6 @@
   },
   "dependencies": {
     "history": "^4.6.1",
-    "koa": "^2.5.1",
-    "koa-static": "^4.0.3",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.8",
     "react": "^16.0.0",
