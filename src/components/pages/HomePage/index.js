@@ -120,7 +120,7 @@ class HomePage extends React.Component {
     const {options, optionValues} = this.state
     const eachOption = (selected, index) => (
       <Options
-        key={optionValues + index + offset}
+        key={index + offset}
         no={index + offset + 1}
         selected={selected}
         values={optionValues}
@@ -135,12 +135,11 @@ class HomePage extends React.Component {
     const {numberColumns, options, optionValues} = this.state
     const size = Math.ceil(options.length / numberColumns)
     const min = SPAN_WIDTH + optionValues.length * 50
-    const widths = [`${min}px`, `${min + 10}px`]
     for (let i = 0; i < numberColumns; i ++) {
       const offset = i * size
       const last = i === numberColumns - 1 ? options.length : offset + size
       result.push(
-        <Column key={i} widths={widths}>
+        <Column key={i} maxWidth={`${min}px`} minWidth={`${min + 10}px`}>
           {this.getOptions(offset, last)}
         </Column>
       )

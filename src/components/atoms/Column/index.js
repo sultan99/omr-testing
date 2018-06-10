@@ -3,18 +3,16 @@ import styled from 'styled-components'
 
 const Column = styled.div`
   border: 1px dashed #f7f7f7;
-  flex: 1
-  max-width: ${props => props.widths[1]};
-  min-width: ${props => props.widths[0]};
+  flex: 1;
+  max-width: ${props => props.maxWidth};
+  min-width: ${props => props.minWidth};
   padding: 15px;
   text-align: center;
 `
 
 Column.propTypes = {
-  widths: PropTypes.array
+  maxWidth: PropTypes.string,
+  minWidth: PropTypes.string
 }
 
-Column.defaultProps = {
-  widths: []
-}
 export default Column

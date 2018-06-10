@@ -46,7 +46,7 @@ const Wrapper = styled.div`
   border-radius: 50%;
   border: ${border(false)};
   box-sizing: border-box;
-  color: ${color(false)}
+  color: ${color(false)};
   cursor: pointer;
   font-family: ${font(`primary`)};
   font-size: 20px;
@@ -70,7 +70,7 @@ const Wrapper = styled.div`
 
   &:hover {
     border: ${border(true)};
-    color: ${color(true)}
+    color: ${color(true)};
     padding: 7px 0 0 2px;
 
     > span:first-child {

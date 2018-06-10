@@ -1,9 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, {keyframes} from 'styled-components'
 import {font} from 'styled-theme'
 import {Icon, Mask} from 'components'
 
+const fadeIn = keyframes`
+  from {
+    opacity: 0.1;
+    transform: scale(0.1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+`
 const Head = styled.div`
   align-items: center;
   background-color: #4f4f4f;
@@ -40,6 +50,7 @@ const Footer = styled.div`
   width: auto;
 `
 const Window = styled.div`
+  animation: ${fadeIn} 0.3s ease;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -54,7 +65,7 @@ class Modal extends React.Component {
       return null
     }
     return (
-      <Mask>
+      <Mask fade="0.3">
         <Window>
           <Head>{title}<Icon type="cancel" onClick={onClose}/></Head>
           <Body>{children}</Body>

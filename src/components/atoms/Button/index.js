@@ -23,7 +23,7 @@ const Button = styled.button`
   }
   &:active {
     box-shadow: rgba(0,0,0,0.16) 0px 3px 8px;
-    margin-top: -1px
+    margin-top: -1px;
   }
 `
 
