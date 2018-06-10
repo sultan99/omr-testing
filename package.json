@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node index",
+    "start": "npm run build && node index",
     "env:dev": "cross-env NODE_ENV=development",
     "env:prod": "cross-env NODE_ENV=production",
     "lint": "eslint src src private webpack.config.js",
